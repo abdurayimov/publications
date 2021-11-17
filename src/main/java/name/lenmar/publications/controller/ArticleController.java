@@ -1,33 +1,41 @@
 package name.lenmar.publications.controller;
 
+import name.lenmar.publications.model.Article;
+import name.lenmar.publications.services.ArticleService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("article")
 public class ArticleController {
 
+    @Autowired
+    private ArticleService articleService;
+
     @GetMapping
-    public String getAllArticles() {
-        return "All articles";
+    public List<Article> getAllArticles() {
+        return articleService.getAll();
     }
 
     @GetMapping("{id}")
-    public String getArticleById(@PathVariable Long id) {
-        return "Article by id" + id;
+    public Article getArticleById(@PathVariable Long id) {
+        return articleService.get(id);
     }
 
     @PostMapping
-    public String createNewArticle() {
-        return "New article is created";
+    public Article createNewArticle(@RequestBody Article article) {
+        return articleService.create(article);
     }
 
     @PutMapping("{id}")
-    public String editArticleById(@PathVariable Long id) {
-        return "Article by id is updated";
+    public Article editArticleById(@PathVariable Long id, @RequestBody Article article) {
+        return articleService.update(id, article);
     }
 
     @DeleteMapping("{id}")
-    public String deleteArticleById(@PathVariable Long id) {
-        return "Article by id is deleted";
+    public void deleteArticleById(@PathVariable Long id) {
+        articleService.delete(id);
     }
 }
