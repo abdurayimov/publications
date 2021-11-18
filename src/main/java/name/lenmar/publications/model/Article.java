@@ -1,5 +1,7 @@
 package name.lenmar.publications.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -12,11 +14,14 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
+@Builder
 @Data
-@NoArgsConstructor // temp
+@NoArgsConstructor
+@AllArgsConstructor
 public class Article {
 
     @Id
@@ -28,7 +33,7 @@ public class Article {
     private String title;
 
     @NotEmpty(message = "{validation.author.NotEmpty}")
-    @Size(min = 2, message = "{validation.autor.Size}")
+    @Size(min = 2, message = "{validation.author.Size}")
     private String author;
 
     @NotEmpty(message = "{validation.content.NotEmpty}")
@@ -37,6 +42,6 @@ public class Article {
 
     @NotNull(message = "{validation.dateOfPublishing.NotNull}")
     @Past(message = "{validation.dateOfPublishing.Past}")
-    @DateTimeFormat(pattern = "dd.MM.yyyy")
-    private Date dateOfPublishing;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate dateOfPublishing;
 }
