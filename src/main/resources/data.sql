@@ -1,7 +1,7 @@
 create table article(
-    id bigint auto_increment primary key,
+    id bigserial not null,
     title varchar(100) not null,
     author varchar(255) not null,
     content text not null,
-    dateOfPublishing varchar(100)
+    date_of_publishing date
 );
