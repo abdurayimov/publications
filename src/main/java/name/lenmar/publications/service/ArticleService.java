@@ -4,6 +4,9 @@ import name.lenmar.publications.exception.ArticleNotFoundException;
 import name.lenmar.publications.model.Article;
 import name.lenmar.publications.model.ArticleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -24,14 +27,8 @@ public class ArticleService {
                 .orElseThrow(() -> new ArticleNotFoundException(id));
     }
 
-    public List<Article> getAll() {
-        Iterator<Article> iterator = articleRepository.findAll().iterator();
-
-        List<Article> articles = new ArrayList<>();
-        while (iterator.hasNext()) {
-            articles.add(iterator.next());
-        }
-        return articles;
+    public Page<Article> getAll(Pageable pageable) {
+        return articleRepository.findAll(pageable);
     }
 
     public Article create(Article article) {

@@ -3,6 +3,9 @@ package name.lenmar.publications.controller;
 import name.lenmar.publications.model.Article;
 import name.lenmar.publications.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.ObjectError;
@@ -21,8 +24,8 @@ public class ArticleController {
     private ArticleService articleService;
 
     @GetMapping
-    public List<Article> getAllArticles() {
-        return articleService.getAll();
+    public Page<Article> getAllArticles(@RequestParam Integer page, @RequestParam Integer size) {
+        return articleService.getAll( PageRequest.of(page, size) );
     }
 
     @GetMapping("{id}")
