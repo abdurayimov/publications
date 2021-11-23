@@ -4,12 +4,9 @@ import name.lenmar.publications.exception.ArticleNotFoundException;
 import name.lenmar.publications.model.Article;
 import name.lenmar.publications.model.ArticleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.*;
 
 @Service
 public class ArticleService {
@@ -18,11 +15,6 @@ public class ArticleService {
     private ArticleRepository articleRepository;
 
     public Article get(Long id) {
-        /*Optional<Article> optional = articleRepository.findById(id);
-        if (optional.isPresent()) {
-            return optional.get();
-        }
-        throw new RuntimeException("Article not found");*/
         return articleRepository.findById(id)
                 .orElseThrow(() -> new ArticleNotFoundException(id));
     }

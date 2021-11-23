@@ -1,6 +1,5 @@
 package name.lenmar.publications.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import name.lenmar.publications.model.Article;
 import org.junit.jupiter.api.Test;
@@ -63,6 +62,24 @@ class ArticleControllerTest {
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.content", hasSize(1)));
+    }
+
+    @Test
+    void createArticleValidation() throws Exception {
+        Article testArticle = mockArticle();
+        testArticle.setTitle(null);
+        testArticle.setAuthor("");
+
+        mockMvc.perform(post("/article").contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(testArticle)))
+                .andDo(print())
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    void getNotExistingArticle() throws Exception {
+        mockMvc.perform(get("/article/666"))
+                .andDo(print())
+                .andExpect(status().isNotFound());
     }
 
     private Article mockArticle() {
