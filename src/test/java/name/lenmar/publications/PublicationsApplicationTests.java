@@ -1,14 +1,14 @@
 package name.lenmar.publications;
 
 import name.lenmar.publications.controller.ArticleController;
-import name.lenmar.publications.model.Article;
-import name.lenmar.publications.model.ArticleRepository;
+import name.lenmar.publications.entity.Article;
+import name.lenmar.publications.repository.ArticleRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDate;
-import java.util.Date;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -23,7 +23,7 @@ class PublicationsApplicationTests {
 	private ArticleController aContr;
 
 	@Test
-	public void contextLoads() throws Exception {
+	public void contextLoads() {
 		assertThat(aContr).isNotNull();
 	}
 
@@ -37,7 +37,9 @@ class PublicationsApplicationTests {
 				.dateOfPublishing(LocalDate.of(2021, 11, 15))
 				.build();
 		aRepo.save(article);
-		assertNotNull(aRepo.findById(1L).get());
+		Optional optional = aRepo.findById(1L);
+		if (optional.isPresent())
+			assertNotNull(optional.get());
 	}
 
 	@Test

@@ -1,8 +1,8 @@
 package name.lenmar.publications.service;
 
 import name.lenmar.publications.exception.ArticleNotFoundException;
-import name.lenmar.publications.model.Article;
-import name.lenmar.publications.model.ArticleRepository;
+import name.lenmar.publications.entity.Article;
+import name.lenmar.publications.repository.ArticleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

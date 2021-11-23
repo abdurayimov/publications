@@ -1,4 +1,4 @@
-package name.lenmar.publications.model;
+package name.lenmar.publications.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,7 +15,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
-import java.util.Date;
 
 @Entity
 @Builder

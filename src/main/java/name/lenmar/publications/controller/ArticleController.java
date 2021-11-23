@@ -1,11 +1,10 @@
 package name.lenmar.publications.controller;
 
-import name.lenmar.publications.model.Article;
+import name.lenmar.publications.entity.Article;
 import name.lenmar.publications.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.ObjectError;

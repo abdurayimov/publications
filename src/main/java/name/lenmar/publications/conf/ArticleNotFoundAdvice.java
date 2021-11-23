@@ -1,4 +1,4 @@
-package name.lenmar.publications.controller;
+package name.lenmar.publications.conf;
 
 import name.lenmar.publications.exception.ArticleNotFoundException;
 import org.springframework.http.HttpStatus;

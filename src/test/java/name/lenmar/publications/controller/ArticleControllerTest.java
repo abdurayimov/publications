@@ -1,7 +1,8 @@
 package name.lenmar.publications.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import name.lenmar.publications.model.Article;
+import name.lenmar.publications.entity.Article;
+import org.hamcrest.CoreMatchers;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -9,7 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
-import org.testcontainers.junit.jupiter.Testcontainers;
+//import org.testcontainers.junit.jupiter.Testcontainers;
 
 import java.time.LocalDate;
 
@@ -22,7 +23,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@Testcontainers
+//@Testcontainers
 @SpringBootTest
 @AutoConfigureMockMvc
 class ArticleControllerTest {
@@ -70,9 +71,12 @@ class ArticleControllerTest {
         testArticle.setTitle(null);
         testArticle.setAuthor("");
 
-        mockMvc.perform(post("/article").contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(testArticle)))
+        MvcResult mvcResult = mockMvc.perform(post("/article").contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(testArticle)))
                 .andDo(print())
-                .andExpect(status().isBadRequest());
+                .andExpect(status().isBadRequest())
+                .andReturn();
+        String result = mvcResult.getResponse().getContentAsString();
+        assertThat(result, CoreMatchers.containsString("Please fill in Title"));
     }
 
     @Test
