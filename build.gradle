@@ -26,6 +26,7 @@ dependencies {
 	developmentOnly 'org.springframework.boot:spring-boot-devtools:2.5.6'
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test:2.5.6'
+	testImplementation group: 'org.springframework.security', name: 'spring-security-test', version: '5.6.0'
 	//testImplementation group: 'org.testcontainers', name: 'junit-jupiter', version: '1.16.2'
 	testImplementation group: 'org.testcontainers', name: 'testcontainers', version: '1.16.2'
 	testImplementation group: 'org.testcontainers', name: 'postgresql', version: '1.16.2'

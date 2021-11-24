@@ -1,6 +1,6 @@
 package name.lenmar.publications.conf;
 
-import name.lenmar.publications.exception.ArticleNotFoundException;
+import name.lenmar.publications.error.ArticleNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;

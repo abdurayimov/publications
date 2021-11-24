@@ -1,8 +1,8 @@
-package name.lenmar.publications.exception;
+package name.lenmar.publications.error;
 
 public class ArticleNotFoundException extends RuntimeException {
 
     public ArticleNotFoundException(Long id) {
-        super("Could not find article " + id);
+        super("Article id not found: " + id);
     }
 }
